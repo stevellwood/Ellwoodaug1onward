@@ -77,8 +77,20 @@ public class NameTest {
             years = years + prsn;
             counter++;
         }
-        float average = years/counter;
+        float average = years/counter;//could use users.size()
         return average;
     }
-
+    public void settest()
+        User joesmith = new User("Joe","Smith",40);
+    User joesmithII = new User("Joe","Smith",40);
+    User joesmithIII = new User("Joseph","Smith",40);
+    Set<User> users = new HashSet<>();
+    assertTrue("",users.add(joesmith));
+    assertFalse("",users.add(joesmithII));//fails because same name
+    josesmithIII.setFirstNAme("Joe";) ///this line blows the set and the set doesn't self verify it
+    //joesmith.setFirstNAme
+    System.err.println(users);
+    assertEquals{"",1,users.size()); 
+    Problem with set is that it uses mutable classes like User here
+    He defined equals in the users class to only look at first and last name
 }
