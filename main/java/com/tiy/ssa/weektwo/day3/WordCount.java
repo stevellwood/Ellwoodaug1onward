@@ -13,7 +13,9 @@ import java.util.Map;
 import com.tiy.ssa.weektwo.day2.User;
 
 public class WordCount {
-    Map<String, Integer> map = new HashMap<>();
+    final Map<String, Integer> map = new HashMap<>();
+    final List<String> words = new ArrayList<>(1 << 7); //final is not a guarantee of immutble
+    //Types of variables themselves should be immutable;
 
     /**
      * 
@@ -32,7 +34,8 @@ public class WordCount {
             val = map.get(winput);
         val++;
         map.put(winput, val);
-
+//        this.words.add(word);Thurston's
+//        this.state.merge(word,1,(ignore,count) -> ++count);
         /**
          * @return a <em>case-insensitive</em> count of <code>word</word> in the
          *         words added to this instance
@@ -41,6 +44,7 @@ public class WordCount {
 
     public int count(String word) {
         return map.get(word);
+        //return this.state.getOrDefault(word, 0)   means if word is not in the map return 0
     }
 
     /**
@@ -49,7 +53,7 @@ public class WordCount {
      * @return a logical set of words ordered in descending poularity order, so
      *         top <code>many</code> words
      */
-    public List<String> top(int many) {
+    public List<String> top(int many) {  //entry is a twofer
         List<String> sortedEntries = new ArrayList<>();
         List<Integer> newList = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -58,7 +62,7 @@ public class WordCount {
             newList.add(x); //create a list of the uniquevalue in the map
             // System.out.println(map.get(entry));
             // System.out.println(x);
-
+//Thurston: how do you do this? aren't you chaning the state of teh set
         }
         Collections.sort(newList);
         Collections.reverse(newList);
@@ -92,34 +96,34 @@ public class WordCount {
         // if(entry.getValue().equals(newList.get(i)))
 
     }
-    // }
-    // static <K,V extends Comparable<? super V>> List<Entry<K, V>>
-    // entriesSortedByValues(Map<K,V> map) {
-    //
-    // List<Entry<K,V>> sortedEntries = new
-    // ArrayList<Entry<K,V>>(map.entrySet());
-    //
-    // Collections.sort(sortedEntries,
-    // new Comparator<Entry<K,V>>() {
-    // @Override
-    // public int compare(Entry<K,V> e1, Entry<K,V> e2) {
-    // return e2.getValue().compareTo(e1.getValue());
-    // }
 
     public static List<String> descendingBySize(List<String> input) {
+//        List<String> sortedEntries = new ArrayList<>();
         List<String> newList = new ArrayList<>();
-
-        for (String str : input)
-            newList.add(str);
-
-        for (int i = 0; i < newList.size(); i++)
-            for (int j = 0; j < newList.size() - 1; j++) {
-                if (newList.get(j).length() < newList.get(j + 1).length()) {
-                    String temp = newList.get(j);
-                    newList.set(j, newList.get(j + 1));
-                    newList.set(j + 1, temp);
-                }
-            }
+//        for (Map.Entry<String, Integer> entry : WordCount.entrySet()) {
+//            System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+//            int x = (entry.getValue());
+//            newList.add(x); //create a list of the uniquevalue in the map
+//            // System.out.println(map.get(entry));
+//            // System.out.println(x);
+//
+//        }
+//        Collections.sort(newList);
+//        Collections.reverse(newList);
+//        System.out.println("After Sorting:");
+//        for (int counter = 0; counter<newList.size(); counter++) {
+//            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+//                if (entry.getValue() == counter){
+//                    sortedEntries.add(entry.getKey());
+//                    //System.out.println(counter + " " + entry.getKey());
+//                }
+//            }
+//        }
+//        List<String> returnedSortedEntries = new ArrayList<>();
+//
+//        for (int i = 0; i < many; i++) {
+//            returnedSortedEntries.add(sortedEntries.get(i));
+//        }
         return newList;
 
     }
@@ -131,8 +135,34 @@ public class WordCount {
      *         order, so bottom <code>many</code> words
      */
     public List<String> bottom(int many) {
-        return null;
+        List<String> sortedEntries = new ArrayList<>();
+        List<Integer> newList = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+            int x = (entry.getValue());
+            newList.add(x); //create a list of the uniquevalue in the map
+            // System.out.println(map.get(entry));
+            // System.out.println(x);
+//Thurston: how do you do this? aren't you chaning the state of teh set
+        }
+        Collections.sort(newList);
+        //Collections.reverse(newList);
+        System.out.println("After Sorting:");
+        for (int counter = 0; counter<newList.size(); counter++) {
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                if (entry.getValue() == counter){
+                    sortedEntries.add(entry.getKey());
+                    //System.out.println(counter + " " + entry.getKey());
+                }
+            }
+        }
+        List<String> returnedSortedEntries = new ArrayList<>();
 
+        for (int i = 0; i < many; i++) {
+            returnedSortedEntries.add(sortedEntries.get(i));
+        }
+        
+        return returnedSortedEntries;
     }
 
     /**
