@@ -13,8 +13,7 @@ import com.tiy.ssa.weektwo.day2.User;
 
 public class WordCountTest
 {
-
-    
+ 
 static String SOURCE = "CONTENT content of of go go of WIKIPEDIA PARAGRAPHS GO go here HERE";
 WordCount wordCount = new WordCount();
 

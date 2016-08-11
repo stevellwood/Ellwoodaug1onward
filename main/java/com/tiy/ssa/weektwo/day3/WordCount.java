@@ -16,7 +16,8 @@ public class WordCount {
     final Map<String, Integer> map = new HashMap<>();
     final List<String> words = new ArrayList<>(1 << 7); //final is not a guarantee of immutble
     //Types of variables themselves should be immutable;
-
+    //(1 << 7) is an integer 128 all 2 ^2  from right to left
+    
     /**
      * 
      * @param word

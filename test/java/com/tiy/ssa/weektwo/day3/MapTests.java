@@ -40,5 +40,13 @@ public class MapTests {
         System.out.println("horse".hashCode());
         System.err.println("hoarse".hashCode());
     }
+    @Test
+    public void exceptions(){
+        try{ 
+            foo();}
+        catch (Exception ex){
+        }
+    }
+    static void foo(){}
 //?why do we need to create new object for getting a value when 
 }
